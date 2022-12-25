@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 
-export function BooksList({ searchValue }) {
+export function BooksList({ searchValue, user }) {
 
     // const searchValue = useContext(searchCtx);
-    console.log(searchValue);
+    // console.log(searchValue);
     const [booksList, setBooksList] = useState([]);
     const [booksData, setBooksData] = useState([]);
 
@@ -28,25 +28,19 @@ export function BooksList({ searchValue }) {
     }
 
 
-    const setList = (data) => {
-        if (!searchValue) {
-            setBooksList(data);
-        } else {
-            console.log("s val is ", searchValue)
-            const filteredArray = data.filter((book) => book.name.includes(searchValue));
-            setBooksList(filteredArray)
-        }
-
-
-    }
-
 
     useEffect(() => {
         getBooks();
     }, [])
 
     useEffect(() => {
-        setList(booksData);
+        if (!searchValue) {
+            setBooksList(booksData);
+        } else {
+
+            const filteredArray = booksData.filter((book) => book.name.includes(searchValue));
+            setBooksList(filteredArray)
+        }
     }, [searchValue, booksData])
 
     const tableJsx = <table className="table table-striped-columns table-hover ">
@@ -54,14 +48,14 @@ export function BooksList({ searchValue }) {
             <tr>
                 <th scope="col">S.No.</th>
                 <th scope="col">ISBN</th>
-                <th scope="col">Title</th>
+                <th scope="col">Book Name</th>
                 <th scope="col">Author</th>
                 <th scope="col">count</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            {booksList.map((book, i) => <Book index={i} book={book} />)}
+            {booksList.map((book, i) => <Book user={user} index={i} book={book} />)}
         </tbody>
     </table>;
 
@@ -70,7 +64,7 @@ export function BooksList({ searchValue }) {
         {booksList.length === 0 ? "Loading..." : tableJsx}
     </>);
 }
-function Book({ book, index }) {
+function Book({ book, index, user }) {
 
     const navigate = useNavigate();
 
@@ -81,10 +75,14 @@ function Book({ book, index }) {
             <td>{book.name}</td>
             <td>{book.author}</td>
             <td>{book.availableCount}</td>
-            <td>
-                <button onClick={() => navigate(`edit-book/${book.id}`)} type="button" class="btn btn-info m-1 btn-sm">Edit</button>
-                <button onClick={() => navigate(`delete-book/${book.id}`)} type="button" class="btn btn-danger m-1 btn-sm">Delete</button>
-            </td>
+            {user === "librarian" ? <td>
+                <button onClick={() => navigate(`edit-book/${book.id}`)} type="button" className="btn btn-info m-1 btn-sm">Edit</button>
+                <button onClick={() => navigate(`delete-book/${book.id}`)} type="button" className="btn btn-danger m-1 btn-sm">Delete</button>
+            </td> :
+                <td>
+                    <button onClick={() => navigate(`view-book/${book.id}`)} type="button" className="btn btn-info m-1 btn-sm">Borrow</button>
+                </td>
+            }
         </tr>
     </>);
 

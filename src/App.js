@@ -17,7 +17,12 @@ import { UsersList } from "./components/userslist";
 import { EditUser } from "./components/edituser";
 import { DeleteUser } from "./components/deleteuser";
 import { AddUser } from "./components/adduser";
+
+import { ViewBook } from "./components/viewbook";
+import { BorrowHistory } from "./components/borrowhistory";
+
 import { useState } from 'react';
+import { NotFound } from './components/notfound';
 
 
 
@@ -37,7 +42,7 @@ function App() {
         <Route path="/librarian" element={<LibrarianPage />}>
           <Route index element={<Dashboard />} />
           <Route path='books' element={<Books setSearchValue={setSearchValue} />} >
-            <Route index element={<BooksList searchValue={searchValue} />} />
+            <Route index element={<BooksList searchValue={searchValue} user="librarian" />} />
             <Route path="add-book" element={<AddBook />} />
             <Route path="edit-book/:id" element={<EditBook />} />
             <Route path="delete-book/:id" element={<DeleteBook />} />
@@ -51,11 +56,14 @@ function App() {
         </Route>
 
         <Route path="/user" element={<UserPage />}>
-
-
-
+          {/* <Route index element={<BooksList searchValue={searchValue} user="user" />} /> */}
+          <Route path='books' element={<Books setSearchValue={setSearchValue} />} >
+            <Route index element={<BooksList searchValue={searchValue} user="user" />} />
+            <Route path="view-book/:id" element={<ViewBook />} />
+          </Route>
+          <Route path="borrow-history/:id" element={<BorrowHistory />} />
         </Route>
-
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
 
