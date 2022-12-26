@@ -36,7 +36,7 @@ function UsersList() {
             </tr>
         </thead>
         <tbody>
-            {usersList.map((user, i) => <User index={i} user={user} />)}
+            {usersList.map((user, i) => <User key={user.id} index={i} user={user} />)}
         </tbody>
     </table>;
 

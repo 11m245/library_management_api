@@ -43,7 +43,7 @@ function ViewBook() {
 
         const putBook = () => {
             fetch(`https://63899fdd4eccb986e895a955.mockapi.io/books/${id}`,
-                { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(book) })
+                { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(borrowBook1) })
                 .then(response => checkResponse(response))
                 .catch(err => console.log(err));
         }

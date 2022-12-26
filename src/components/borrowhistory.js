@@ -50,7 +50,7 @@ function BorrowHistory() {
                 </tr>
             </thead>
             <tbody>
-                {user ? (user.borrowHistory.filter((book) => book.isReturned === false).map((book, i) => <Book key={book.id} index={i} book={book} />)) : null}
+                {user ? (user.borrowHistory.filter((book) => book.isReturned === false).map((book, i) => <Book key={book.borrowedOn} index={i} book={book} />)) : null}
             </tbody>
         </table>;
 
@@ -60,9 +60,14 @@ function BorrowHistory() {
 
 function Book({ book, index }) {
 
+
+
     function returnBook() {
 
-        const updateInLibraryData = () => {
+
+        console.log("return book is", book);
+
+        const updateInBooksData = () => {
 
 
 
@@ -74,12 +79,12 @@ function Book({ book, index }) {
 
         }
 
-        updateInLibraryData();
+        updateInBooksData();
         updateInUserHistory();
     }
 
     return (<>
-        <tr key={index} className="align-middle">
+        <tr className="align-middle">
             <th scope="row">{index + 1}</th>
             <td>{book.isbn}</td>
             <td>{book.name}</td>
@@ -87,7 +92,7 @@ function Book({ book, index }) {
             <td>{new Date(book.borrowedOn).toLocaleString()}</td>
 
             <td>
-                <button onClick={() => returnBook()} type="button" className="btn btn-info m-1 btn-sm">Return</button>
+                <button onClick={() => returnBook(book.isbn, book.id)} type="button" className="btn btn-info m-1 btn-sm">Return</button>
             </td>
 
         </tr>
