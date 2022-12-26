@@ -4,8 +4,11 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 function UserPage() {
     const navigate = useNavigate();
     const id = "1014";
-    const navItems = [{ name: "Dashboard", path: "" },
-    { name: "Books", path: "books" }, { name: "Borrow History", path: `borrow-history/${id}` }]
+    const navItems = [
+        { name: "Dashboard", path: "" },
+        { name: "Books", path: "books" },
+        { name: "Borrow History", path: `borrow-history/${id}` },
+        { name: "Returned History", path: `return-history/${id}` }]
 
     return (<>
 

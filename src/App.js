@@ -23,6 +23,8 @@ import { BorrowHistory } from "./components/borrowhistory";
 
 import { useState } from 'react';
 import { NotFound } from './components/notfound';
+import { ReturnHistory } from './components/returnhistory';
+
 
 
 
@@ -62,6 +64,7 @@ function App() {
             <Route path="view-book/:id" element={<ViewBook />} />
           </Route>
           <Route path="borrow-history/:id" element={<BorrowHistory />} />
+          <Route path="return-history/:id" element={<ReturnHistory />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

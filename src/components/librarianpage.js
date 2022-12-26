@@ -3,8 +3,10 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 function LibrarianPage() {
     const navigate = useNavigate();
 
-    const navItems = [{ name: "Dashboard", path: "" },
-    { name: "Books", path: "books" }, { name: "Users", path: "users" }]
+    const navItems = [
+        { name: "Dashboard", path: "" },
+        { name: "Books", path: "books" },
+        { name: "Users", path: "users" }]
 
 
 

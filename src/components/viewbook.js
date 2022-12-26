@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 
 function ViewBook() {
 
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const [book, setBook] = useState({});
     const [user, setUser] = useState({});
@@ -84,7 +85,7 @@ function ViewBook() {
             }
             fetch(`https://63899fdd4eccb986e895a955.mockapi.io/users/${id}`,
                 { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(borrowedUser) })
-                .then(response => checkResponse(response)).then(response => response.json())
+                .then(response => checkResponse(response)).then(response => response.json()).then(navigate(`/user/borrow-history/${id}`))
                 .catch(err => console.log(err));
 
         }

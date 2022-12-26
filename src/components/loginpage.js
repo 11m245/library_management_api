@@ -6,7 +6,7 @@ function LoginPage() {
 
 
     const menus = [{ name: "Librarian", image: "http://www.clker.com/cliparts/8/8/c/5/1516775828438601192librarian-clipart.hi.png", path: "/librarian" },
-    { name: "User", image: "https://img.favpng.com/20/23/23/library-free-content-librarian-clip-art-png-favpng-jjeEAJ3Fd7wxhmxZJShBC5jz9.jpg", path: "/user" }]
+    { name: "User 1014", image: "https://img.favpng.com/20/23/23/library-free-content-librarian-clip-art-png-favpng-jjeEAJ3Fd7wxhmxZJShBC5jz9.jpg", path: "/user" }]
 
 
     return (<>
