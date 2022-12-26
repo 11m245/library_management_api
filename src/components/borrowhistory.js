@@ -50,7 +50,7 @@ function BorrowHistory() {
                 </tr>
             </thead>
             <tbody>
-                {user ? (user.borrowHistory.filter((book) => book.isReturned === false).map((book, i) => <Book index={i} book={book} />)) : null}
+                {user ? (user.borrowHistory.filter((book) => book.isReturned === false).map((book, i) => <Book key={book.id} index={i} book={book} />)) : null}
             </tbody>
         </table>;
 

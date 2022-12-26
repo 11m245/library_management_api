@@ -44,7 +44,7 @@ function ViewBook() {
         const putBook = () => {
             fetch(`https://63899fdd4eccb986e895a955.mockapi.io/books/${id}`,
                 { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(book) })
-                .then(response => checkResponse(response)).then(data => console.log(data))
+                .then(response => checkResponse(response))
                 .catch(err => console.log(err));
         }
 
@@ -66,7 +66,7 @@ function ViewBook() {
             // console.log("borrow user", data);
 
             const borrowedUser = { ...data, borrowHistory: [...data.borrowHistory, { isbn: book.isbn, name: book.name, author: book.author, borrowedOn: Date.now(), isReturned: false, returnedOn: "" }] }
-            console.log("borrowed user", borrowedUser);
+            // console.log("borrowed user", borrowedUser);
             putBorrowedUser(id, borrowedUser);
         }
 
@@ -85,7 +85,7 @@ function ViewBook() {
             fetch(`https://63899fdd4eccb986e895a955.mockapi.io/users/${id}`,
                 { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(borrowedUser) })
                 .then(response => checkResponse(response)).then(response => response.json())
-                .then(data => { console.log(data) }).catch(err => console.log(err));
+                .catch(err => console.log(err));
 
         }
 

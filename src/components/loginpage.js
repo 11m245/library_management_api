@@ -22,7 +22,7 @@ function LoginPage() {
                         <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                             <h6 className="btn btn-primary d-block mx-auto mb-2" type="button">Choose Login</h6>
                             <div className="login-menus d-flex gap-3">
-                                {menus.map((menu, i) => <LoginMenu index={i} menu={menu} />)}
+                                {menus.map((menu, i) => <LoginMenu key={menu.name} menu={menu} />)}
                             </div>
                         </div>
                     </div>
@@ -33,18 +33,18 @@ function LoginPage() {
 }
 
 
-const LoginMenu = ({ index, menu }) => {
+const LoginMenu = ({ menu }) => {
     const navigate = useNavigate();
 
 
-    return (<>
+    return (
 
-        <div key={index} className="login-menu-wrapper" onClick={() => navigate(menu.path)}>
+        <div className="login-menu-wrapper" onClick={() => navigate(menu.path)}>
             <img style={{ width: "200px", height: "150px" }} src={menu.image} alt="menu image" />
             <h6 className="text-center fw-bold">{menu.name}</h6>
         </div>
 
-    </>)
+    )
 }
 
 

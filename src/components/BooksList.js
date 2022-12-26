@@ -55,7 +55,7 @@ export function BooksList({ searchValue, user }) {
             </tr>
         </thead>
         <tbody>
-            {booksList.map((book, i) => <Book user={user} index={i} book={book} />)}
+            {booksList.map((book, i) => <Book key={book.id} index={i} user={user} book={book} />)}
         </tbody>
     </table>;
 
@@ -69,7 +69,7 @@ function Book({ book, index, user }) {
     const navigate = useNavigate();
 
     return (<>
-        <tr key={index} className="align-middle">
+        <tr className="align-middle">
             <th scope="row">{index + 1}</th>
             <td>{book.isbn}</td>
             <td>{book.name}</td>
