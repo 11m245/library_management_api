@@ -16,7 +16,7 @@ function LibrarianPage() {
                     <ul style={{ listStyle: "none", display: "flex", gap: "1rem" }}>
                         {navItems.map((menu, i) => <li style={{ fontSize: 20, fontWeight: "bold" }} key={i} ><Link to={menu.path}> {menu.name} </Link></li>)}
                     </ul>
-                    <button className="logout-btn" style={{ position: "relative", bottom: "5px", right: "10px" }} onClick={() => navigate("/")} type="button" className="btn btn-sm btn-primary">Logout</button>
+                    <button style={{ position: "relative", bottom: "5px", right: "10px" }} onClick={() => navigate("/")} type="button" className="btn btn-sm btn-primary logout-btn">Logout</button>
                 </div>
 
             </div>
