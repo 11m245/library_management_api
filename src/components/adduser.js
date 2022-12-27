@@ -12,10 +12,10 @@ function AddUser() {
 
 
     const formValidationSchema = yup.object({
-        userId: yup.string().required("User Id is mandatory "),
-        name: yup.string().required(),
-        mobile: yup.string().required(),
-        email: yup.string().required()
+        userId: yup.string().required("User Id is mandatory ").min(4),
+        name: yup.string().required().min(4),
+        mobile: yup.string().required().min(6),
+        email: yup.string().required().min(10)
     })
 
     const formik = useFormik({
@@ -70,9 +70,9 @@ function AddUser() {
             <span style={{ color: "red" }}>{formik.touched.name && formik.errors.name ? formik.errors.name : null}</span>
             <br />
             <input type="text" className={(formik.touched.mobile && formik.errors.mobile) ? "mt-2 form-control is-invalid" : "mt-2 form-control is-valid"} name="mobile" placeholder="mobile" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.mobile} />
-            <span style={{ color: "red" }}>{formik.touched.author && formik.errors.author ? formik.errors.author : null}</span>
+            <span style={{ color: "red" }}>{formik.touched.mobile && formik.errors.mobile ? formik.errors.mobile : null}</span>
             <br />
-            <input type="email" className={(formik.touched.email && formik.errors.email) ? "mt-2 form-control is-invalid" : "mt-2 form-control is-valid"} name="email" placeholder="Count" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.email} />
+            <input type="email" className={(formik.touched.email && formik.errors.email) ? "mt-2 form-control is-invalid" : "mt-2 form-control is-valid"} name="email" placeholder="email" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.email} />
             <span style={{ color: "red" }}>{formik.touched.email && formik.errors.email ? formik.errors.email : null}</span>
             <br />
 

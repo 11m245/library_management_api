@@ -6,7 +6,7 @@ function BorrowHistory() {
 
     const { id } = useParams();
     const [user, setUser] = useState(null);
-
+    const [refresh, setRefresh] = useState(0);
 
     useEffect(() => {
 
@@ -28,10 +28,10 @@ function BorrowHistory() {
         getUser();
 
 
-    }, [])
+    }, [refresh])
 
 
-
+    // console.log(user, "user details")
 
 
     return (<>
@@ -50,7 +50,9 @@ function BorrowHistory() {
                 </tr>
             </thead>
             <tbody>
-                {user ? (user.borrowHistory.filter((hbook) => hbook.isReturned === false).map((hbook, i) => <Book key={hbook.borrowedOn} index={i} hbook={hbook} />)) : null}
+                {user ? (user.borrowHistory.filter((hbook) => hbook.isReturned === false)
+                    .map((hbook, i) =>
+                        <Book setRefresh={setRefresh} key={hbook.borrowedOn} index={i} hbook={hbook} />)) : "loading ..."}
             </tbody>
         </table>;
 
@@ -58,13 +60,11 @@ function BorrowHistory() {
 }
 
 
-function Book({ hbook, index }) {
-
-    const [book, setBook] = useState(null);
-    const [user, setUser] = useState(null);
+function Book({ hbook, index, setRefresh }) {
 
 
-    function returnBook(isbn, id_user, userId) {
+
+    const returnBook = async (isbn, id_user, userId) => {
         // console.log("return hbook is", hbook);
 
         const updateInBooksData = () => {
@@ -160,7 +160,7 @@ function Book({ hbook, index }) {
                     const putUser = async () => {
                         fetch(`https://63899fdd4eccb986e895a955.mockapi.io/users/${id_user}`,
                             { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(updatedUser) })
-                            .then(response => checkResponse(response))
+                            .then(response => checkResponse(response)).then(setRefresh(prev => prev + 1))
                             .catch(err => console.log(err));
                     }
 
@@ -176,8 +176,24 @@ function Book({ hbook, index }) {
             getUser();
         }
 
-        updateInBooksData();
-        updateInUserHistory();
+        await updateInBooksData();
+        await updateInUserHistory();
+        // const checkResponse = (response) => {
+        //     if ((response.status <= 299) && (response.status > 199)) {
+        //         return response;
+        //     } else {
+        //         throw (` ${response.status} ${response.statusText}`)
+        //     }
+        // }
+        // const getUser1 = () => {
+        //     fetch(`https://63899fdd4eccb986e895a955.mockapi.io/users/${id_user}`,
+        //         { method: "GET" })
+        //         .then(response => checkResponse(response)).then(response => response.json())
+        //         .then(data => setUser(data))
+        //         .catch(err => console.log(err));
+        // }
+
+        // await getUser1();
     }
 
     return (<>

@@ -7,11 +7,11 @@ function AddBook() {
     const navigate = useNavigate();
 
     const formValidationSchema = yup.object({
-        isbn: yup.string().required("isbn of book is mandatory "),
-        name: yup.string().required(),
-        author: yup.string().required(),
-        maxCount: yup.number().required(),
-        description: yup.string()
+        isbn: yup.string().required("isbn of book is mandatory ").min(2),
+        name: yup.string().required().min(4),
+        author: yup.string().required().min(4),
+        maxCount: yup.number().required().min(0),
+        description: yup.string().min(10)
     })
 
     const formik = useFormik({
