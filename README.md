@@ -5,7 +5,7 @@ Using this application, users can borrow / return the books, librarians can upda
 ## Demo Login Credentials
 
 for Librarian
-username  - admin@gmail.com , password  - 12345678
+username  - librarian@gmail.com , password  - 12345678
 for users
 username  - user@gmail.com , password  - 12345678
 
