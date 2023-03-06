@@ -5,7 +5,7 @@ Using this application, users can borrow / return the books, librarians can upda
 ## Demo Login Credentials
 
         
-for Librarian ->  please select the login user as librarian.
+for Librarian ->  please select the login user as librarian. \
 for users -> please select the login user as user1014
 
 
